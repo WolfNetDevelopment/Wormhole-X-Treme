@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>de.luricos.bukkit</groupId>
+    <groupId>de.luricos.bukkit.WormHoleXTreme</groupId>
     <version>0.9</version>
-    <artifactId>WormHoleXTremeWormhole</artifactId>
+    <artifactId>Wormhole</artifactId>
     <packaging>jar</packaging>
     <name>WormHoleXTremeWormhole</name>
     <properties>
@@ -81,8 +81,8 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>de.luricos.bukkit</groupId>
-            <artifactId>WormholeXTremeWorlds</artifactId>
+            <groupId>de.luricos.bukkit.WormHoleXTreme</groupId>
+            <artifactId>Worlds</artifactId>
             <version>[0.5,)</version>
             <type>jar</type>
         </dependency>

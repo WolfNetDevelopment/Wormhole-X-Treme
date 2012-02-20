@@ -70,6 +70,7 @@ public class PermissionsSupport {
             if (WormholeXTreme.getPermissionsEx() == null) {
                 final Plugin test = WormholeXTreme.getThisPlugin().getServer().getPluginManager().getPlugin("PermissionsEx");
                 final Plugin test2 = WormholeXTreme.getThisPlugin().getServer().getPluginManager().getPlugin("PermissionsBukkit");
+                final Plugin test3 = WormholeXTreme.getThisPlugin().getServer().getPluginManager().getPlugin("bPermissions");
                 if ((test != null) && (Bukkit.getServer().getPluginManager().isPluginEnabled("PermissionsEx"))) {
                     final String v = test.getDescription().getVersion();
                     checkPermissionsVersion(v);
@@ -87,6 +88,21 @@ public class PermissionsSupport {
                 } else if ((test2 != null) && (Bukkit.getServer().getPluginManager().isPluginEnabled("PermissionsBukkit"))) {
                 	WormholeXTreme.setPermBukkit(true);
                 	WXTLogger.prettyLog(Level.INFO, false, "Attached to PermissionsBukkit");
+                	if (ConfigManager.getSimplePermissions()) {
+                        WXTLogger.prettyLog(Level.INFO, false, "Simple Permissions Enabled");
+                    } else {
+                        WXTLogger.prettyLog(Level.INFO, false, "Complex Permissions Enabled");
+                    }
+                } else if ((test3 != null) && (Bukkit.getServer().getPluginManager().isPluginEnabled("bPermissions"))) {
+                	WormholeXTreme.setPermBukkit(true);
+                	WXTLogger.prettyLog(Level.INFO, false, "Attached to bPermissions");
+                	if (ConfigManager.getSimplePermissions()) {
+                        WXTLogger.prettyLog(Level.INFO, false, "Simple Permissions Enabled");
+                    } else {
+                        WXTLogger.prettyLog(Level.INFO, false, "Complex Permissions Enabled");
+                    }
+                } else if (WormholeXTreme.getPermBukkit()){
+                	WXTLogger.prettyLog(Level.INFO, false, "Attached to Bukkits PermissionAPI SuperPerms");
                 	if (ConfigManager.getSimplePermissions()) {
                         WXTLogger.prettyLog(Level.INFO, false, "Simple Permissions Enabled");
                     } else {

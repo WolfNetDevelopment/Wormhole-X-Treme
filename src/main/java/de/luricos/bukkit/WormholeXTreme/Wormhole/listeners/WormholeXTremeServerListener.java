@@ -51,6 +51,8 @@ public class WormholeXTremeServerListener implements Listener {
             WormholeWorldsSupport.disableWormholeWorlds();
         } else if (event.getPlugin().getDescription().getName().equals("PermissionsBukkit") && !ConfigManager.getPermissionsSupportDisable()) {
         	PermissionsSupport.disablePermissions();
+        } else if (event.getPlugin().getDescription().getName().equals("bPermissions") && !ConfigManager.getPermissionsSupportDisable()) {
+        	PermissionsSupport.disablePermissions();
         }
     }
 
@@ -64,6 +66,8 @@ public class WormholeXTremeServerListener implements Listener {
         } else if (event.getPlugin().getDescription().getName().equals("Help") && !ConfigManager.getHelpSupportDisable()) {
             HelpSupport.enableHelp();
         } else if (event.getPlugin().getDescription().getName().equals("PermissionsBukkit") && !ConfigManager.getPermissionsSupportDisable()) {
+        	PermissionsSupport.enablePermissions();
+        } else if (event.getPlugin().getDescription().getName().equals("bPermissions") && !ConfigManager.getPermissionsSupportDisable()) {
         	PermissionsSupport.enablePermissions();
         }
 //        else if (event.getPlugin().getDescription().getName().equals("WormholeXTremeWorlds") && ConfigManager.isWormholeWorldsSupportEnabled()) {

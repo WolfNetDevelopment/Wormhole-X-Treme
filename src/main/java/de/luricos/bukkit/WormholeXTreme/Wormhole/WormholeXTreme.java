@@ -184,6 +184,9 @@ public class WormholeXTreme extends JavaPlugin {
 
         PermissionsManager.loadPermissions();
 
+        // en-/disable support for bukkits SuperPerms even if no known plugin is installed!
+        permBukkit = ConfigManager.isSuperPermEnabled();
+
         try {
             PermissionsSupport.enablePermissions();
             HelpSupport.enableHelp();

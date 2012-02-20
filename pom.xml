@@ -14,7 +14,13 @@
             <id>luricos.de-repo</id>
             <url>http://repo.luricos.de/bukkit-plugins/</url>
         </repository>
-    </repositories>    
+        <repository>
+            <snapshots />
+            <id>BukkitDev</id>
+            <name>BukkitDev</name>
+            <url>http://www.gestdown.info:8888/nexus/content/groups/BukkitDev/</url>
+        </repository>
+    </repositories>
     <build>
         <finalName>WormholeXTreme</finalName>
         <plugins>
@@ -57,14 +63,15 @@
                 </executions>
             </plugin>
         </plugins>
+        <defaultGoal>clean install</defaultGoal>
     </build>
     <dependencies>
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.1-R3</version>
+            <version>1.1-R4</version>
             <type>jar</type>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>ru.tehkode</groupId>

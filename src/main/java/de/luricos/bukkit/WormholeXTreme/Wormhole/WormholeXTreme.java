@@ -102,6 +102,8 @@ public class WormholeXTreme extends JavaPlugin {
             return;
         }
 
+        permBukkit = ConfigManager.isSuperPermEnabled();
+
         // Load our shapes, stargates, and internal permissions.
         StargateHelper.loadShapes();
 
@@ -160,6 +162,9 @@ public class WormholeXTreme extends JavaPlugin {
         // register all players
         WormholePlayerManager.registerAllOnlinePlayers();
 
+        // Set SuperPerm support
+        permBukkit = ConfigManager.isSuperPermEnabled();
+
         WXTLogger.prettyLog(Level.INFO, true, "Reloading complete.");
         return true;
     }
@@ -184,8 +189,9 @@ public class WormholeXTreme extends JavaPlugin {
 
         PermissionsManager.loadPermissions();
 
-        // en-/disable support for bukkits SuperPerms even if no known plugin is installed!
-        permBukkit = ConfigManager.isSuperPermEnabled();
+        // Is support for bukkits SuperPerms en-/disabled?
+        WXTLogger.prettyLog(Level.INFO, false, "SuperPerms enabled: " + ConfigManager.isSuperPermEnabled());
+
 
         try {
             PermissionsSupport.enablePermissions();

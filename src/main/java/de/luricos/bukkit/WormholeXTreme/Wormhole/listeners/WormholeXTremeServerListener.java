@@ -32,7 +32,7 @@ import org.bukkit.event.EventPriority;
 
 /**
  * WormholeXTreme Server Listener.
- * 
+ *
  * @author Ben Echols (Lologarithm)
  * @author Dean Bailey (alron)
  */
@@ -49,6 +49,8 @@ public class WormholeXTremeServerListener implements Listener {
             HelpSupport.disableHelp();
         } else if (event.getPlugin().getDescription().getName().equals("WormholeXTremeWorlds") && ConfigManager.isWormholeWorldsSupportEnabled()) {
             WormholeWorldsSupport.disableWormholeWorlds();
+        } else if (event.getPlugin().getDescription().getName().equals("PermissionsBukkit") && !ConfigManager.getPermissionsSupportDisable()) {
+        	PermissionsSupport.disablePermissions();
         }
     }
 
@@ -61,7 +63,9 @@ public class WormholeXTremeServerListener implements Listener {
             PermissionsSupport.enablePermissions();
         } else if (event.getPlugin().getDescription().getName().equals("Help") && !ConfigManager.getHelpSupportDisable()) {
             HelpSupport.enableHelp();
-        } 
+        } else if (event.getPlugin().getDescription().getName().equals("PermissionsBukkit") && !ConfigManager.getPermissionsSupportDisable()) {
+        	PermissionsSupport.enablePermissions();
+        }
 //        else if (event.getPlugin().getDescription().getName().equals("WormholeXTremeWorlds") && ConfigManager.isWormholeWorldsSupportEnabled()) {
 //            WormholeWorldsSupport.enableWormholeWorlds();
 //        }

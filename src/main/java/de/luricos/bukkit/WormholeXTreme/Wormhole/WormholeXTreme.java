@@ -48,7 +48,7 @@ import java.util.logging.Level;
 
 /**
  * WormholeXtreme for Bukkit.
- * 
+ *
  * @author Ben Echols (Lologarithm)
  * @author Dean Bailey (alron)
  */
@@ -65,10 +65,11 @@ public class WormholeXTreme extends JavaPlugin {
     /** plugins **/
     private static PermissionManager permissions = null;
     private static Help help = null;
-    
+    private static boolean permBukkit = false;
+
     /** The wormhole x treme worlds. */
     private static WorldHandler worldHandler = null;
-    
+
     /** The Scheduler. */
     private static BukkitScheduler scheduler = null;
 
@@ -84,13 +85,13 @@ public class WormholeXTreme extends JavaPlugin {
 
         // send welcome message
         WXTLogger.prettyLog(Level.INFO, true, "Loading WormholeXTreme ...");
-        
+
         // set scheduler
         WormholeXTreme.setScheduler(this.getServer().getScheduler());
-        
+
         // Load our config files and set logging level right away.
         ConfigManager.setupConfigs(this.getDescription());
-        
+
         // set logging level after loading config
         WXTLogger.setLogLevel(ConfigManager.getLogLevel());
 
@@ -106,10 +107,10 @@ public class WormholeXTreme extends JavaPlugin {
 
         WXTLogger.prettyLog(Level.INFO, true, "Load complete");
     }
-    
+
     public boolean reloadPlugin() {
         WXTLogger.prettyLog(Level.INFO, true, "Reload in progress...");
-        
+
         // save all gates to sql and save config
         try {
             Configuration.writeFile(getDescription());
@@ -128,25 +129,25 @@ public class WormholeXTreme extends JavaPlugin {
             e.printStackTrace();
             return false;
         }
-        
+
         // shutdown db
         StargateDBManager.shutdown();
-        
+
         // clear wormholePlayers
         WormholePlayerManager.unregisterAllPlayers();
-        
+
         // disconnect from Worlds
         WormholeWorldsSupport.disableWormholeWorlds();
-        
+
         // load config
         ConfigManager.setupConfigs(this.getDescription());
-        
+
         // set logging level after loading config
         WXTLogger.setLogLevel(ConfigManager.getLogLevel());
-        
+
         // reload stargate shapes
         StargateHelper.reloadShapes();
-        
+
         // Try and attach to Permissions and iConomy and Help
         if (!ConfigManager.isWormholeWorldsSupportEnabled()) {
             WXTLogger.prettyLog(Level.INFO, true, "Wormhole Worlds support disabled in settings.txt, loading stargates and worlds ourself.");
@@ -155,14 +156,14 @@ public class WormholeXTreme extends JavaPlugin {
 
         // enable support if configured
         WormholeWorldsSupport.enableWormholeWorlds(true);
-        
+
         // register all players
         WormholePlayerManager.registerAllOnlinePlayers();
-        
+
         WXTLogger.prettyLog(Level.INFO, true, "Reloading complete.");
         return true;
-    }    
-    
+    }
+
     /* (non-Javadoc)
      * @see org.bukkit.plugin.Plugin#onEnable()
      */
@@ -180,7 +181,7 @@ public class WormholeXTreme extends JavaPlugin {
             WXTLogger.prettyLog(Level.INFO, true, "Wormhole Worlds support disabled in settings.txt, loading stargates and worlds ourself.");
             StargateDBManager.loadStargates(this.getServer());
         }
-        
+
         PermissionsManager.loadPermissions();
 
         try {
@@ -193,20 +194,20 @@ public class WormholeXTreme extends JavaPlugin {
             WXTLogger.prettyLog(Level.WARNING, false, "Caught Exception while trying to load support plugins." + e.getMessage());
             e.printStackTrace();
         }
-        
+
         registerEvents(true);
         HelpSupport.registerHelpCommands();
         if (!ConfigManager.isWormholeWorldsSupportEnabled()) {
             registerEvents(false);
             registerCommands();
         }
-        
+
         // register all online players onenable/onreload
         WormholePlayerManager.registerAllOnlinePlayers();
-        
+
         WXTLogger.prettyLog(Level.INFO, true, "Boot sequence completed");
-    }   
-    
+    }
+
     /* (non-Javadoc)
      * @see org.bukkit.plugin.Plugin#onDisable()
      */
@@ -218,7 +219,7 @@ public class WormholeXTreme extends JavaPlugin {
         }
 
         WXTLogger.prettyLog(Level.INFO, true, "Shutdown sequence initiated...");
-        
+
         try {
             Configuration.writeFile(getDescription());
             final ArrayList<Stargate> gates = StargateManager.getAllGates();
@@ -231,20 +232,20 @@ public class WormholeXTreme extends JavaPlugin {
             }
 
             StargateDBManager.shutdown();
-            
+
             // clear wormholePlayers
-            WormholePlayerManager.unregisterAllPlayers();            
-            
+            WormholePlayerManager.unregisterAllPlayers();
+
             WXTLogger.prettyLog(Level.INFO, true, "Successfully shutdown WXT.");
         } catch (final Exception e) {
             WXTLogger.prettyLog(Level.SEVERE, false, "Caught exception while shutting down: " + e.getMessage());
             e.printStackTrace();
         }
     }
-    
+
     /**
      * Gets the help.
-     * 
+     *
      * @return the help
      */
     public static Help getHelp() {
@@ -252,17 +253,26 @@ public class WormholeXTreme extends JavaPlugin {
     }
 
     /**
-     * Gets the permissions.
-     * 
+     * Gets the permissions for PermissionsEx.
+     *
      * @return the permissions
      */
-    public static PermissionManager getPermissions() {
+    public static PermissionManager getPermissionsEx() {
         return permissions;
     }
 
     /**
+     * Gets the permissions for PermissionsBukkit.
+     *
+     * @return the permissions
+     */
+    public static boolean getPermBukkit() {
+        return permBukkit;
+    }
+
+    /**
      * Gets the scheduler.
-     * 
+     *
      * @return the scheduler
      */
     public static BukkitScheduler getScheduler() {
@@ -271,7 +281,7 @@ public class WormholeXTreme extends JavaPlugin {
 
     /**
      * Gets the plugin.
-     * 
+     *
      * @return the plugin instance
      */
     public static WormholeXTreme getThisPlugin() {
@@ -285,7 +295,7 @@ public class WormholeXTreme extends JavaPlugin {
 
     /**
      * Gets the wormhole x treme worlds.
-     * 
+     *
      * @return the wormhole x treme worlds
      */
     public static WorldHandler getWorldHandler() {
@@ -341,7 +351,7 @@ public class WormholeXTreme extends JavaPlugin {
 
     /**
      * Sets the help.
-     * 
+     *
      * @param help the new help
      */
     public static void setHelp(Help help) {
@@ -349,17 +359,25 @@ public class WormholeXTreme extends JavaPlugin {
     }
 
     /**
-     * Sets the permissions.
+     * Sets the permissions for PermissionEx.
      *
      * @param permissions the new permissions
      */
-    public static void setPermissions(PermissionManager permissions) {
+    public static void setPermissionsEx(PermissionManager permissions) {
         WormholeXTreme.permissions = permissions;
     }
 
     /**
+     * Sets the permissions for PermissionsBukkit.
+     *
+     */
+    public static void setPermBukkit(boolean permBukkit) {
+    	WormholeXTreme.permBukkit = permBukkit;
+    }
+
+    /**
      * Sets the scheduler.
-     * 
+     *
      * @param scheduler
      *            the new scheduler
      */
@@ -369,7 +387,7 @@ public class WormholeXTreme extends JavaPlugin {
 
     /**
      * Sets the wormhole x treme worlds.
-     * 
+     *
      * @param worldHandler
      *            the new wormhole x treme worlds
      */

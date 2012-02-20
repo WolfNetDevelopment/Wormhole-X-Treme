@@ -62,7 +62,7 @@ public class StargateShapeLayer {
 
     /**
      * Instantiates a new stargate shape layer.
-     * 
+     *
      * @param layerLines
      *            the layer lines
      * @param height
@@ -71,7 +71,8 @@ public class StargateShapeLayer {
      *            the width
      */
     protected StargateShapeLayer(final String[] layerLines, final int height, final int width) {
-        int numBlocks = 0;
+        @SuppressWarnings("unused")
+		int numBlocks = 0;
 
         // 1. scan all lines for lines beginning with [  - that is the height of the gate
         for (int i = 0; i < layerLines.length; i++) {
@@ -174,7 +175,7 @@ public class StargateShapeLayer {
 
     /**
      * Gets the layer activation position.
-     * 
+     *
      * @return the layer activation position
      */
     public int[] getLayerActivationPosition() {
@@ -185,7 +186,7 @@ public class StargateShapeLayer {
 
     /**
      * Gets the layer block positions.
-     * 
+     *
      * @return the layer block positions
      */
     public ArrayList<Integer[]> getLayerBlockPositions() {
@@ -194,7 +195,7 @@ public class StargateShapeLayer {
 
     /**
      * Gets the layer dialer position.
-     * 
+     *
      * @return the layer dialer position
      */
     public int[] getLayerDialSignPosition() {
@@ -205,7 +206,7 @@ public class StargateShapeLayer {
 
     /**
      * Gets the layer iris activation position.
-     * 
+     *
      * @return the layer iris activation position
      */
     public int[] getLayerIrisActivationPosition() {
@@ -216,7 +217,7 @@ public class StargateShapeLayer {
 
     /**
      * Gets the layer light positions.
-     * 
+     *
      * @return the layer light positions
      */
     public ArrayList<ArrayList<Integer[]>> getLayerLightPositions() {
@@ -225,7 +226,7 @@ public class StargateShapeLayer {
 
     /**
      * Gets the layer minecart exit position.
-     * 
+     *
      * @return the layer minecart exit position
      */
     public int[] getLayerMinecartExitPosition() {
@@ -236,7 +237,7 @@ public class StargateShapeLayer {
 
     /**
      * Gets the layer sign position.
-     * 
+     *
      * @return the layer sign position
      */
     public int[] getLayerNameSignPosition() {
@@ -247,7 +248,7 @@ public class StargateShapeLayer {
 
     /**
      * Gets the layer enter position.
-     * 
+     *
      * @return the layer enter position
      */
     public int[] getLayerPlayerExitPosition() {
@@ -258,7 +259,7 @@ public class StargateShapeLayer {
 
     /**
      * Gets the layer portal positions.
-     * 
+     *
      * @return the layer portal positions
      */
     public ArrayList<Integer[]> getLayerPortalPositions() {
@@ -267,7 +268,7 @@ public class StargateShapeLayer {
 
     /**
      * Gets the layer redstone activation position.
-     * 
+     *
      * @return the layer redstone activation position
      */
     public int[] getLayerRedstoneDialActivationPosition() {
@@ -278,7 +279,7 @@ public class StargateShapeLayer {
 
     /**
      * Gets the layer redstone activation position.
-     * 
+     *
      * @return the layer redstone activation position
      */
     public int[] getLayerRedstoneGateActivatedPosition() {
@@ -289,7 +290,7 @@ public class StargateShapeLayer {
 
     /**
      * Gets the layer redstone dialer activation position.
-     * 
+     *
      * @return the layer redstone dialer activation position
      */
     public int[] getLayerRedstoneSignActivationPosition() {
@@ -300,7 +301,7 @@ public class StargateShapeLayer {
 
     /**
      * Gets the layer woosh positions.
-     * 
+     *
      * @return the layer woosh positions
      */
     public ArrayList<ArrayList<Integer[]>> getLayerWooshPositions() {
@@ -309,7 +310,7 @@ public class StargateShapeLayer {
 
     /**
      * Sets the layer activation position.
-     * 
+     *
      * @param layerActivationPosition
      *            the new layer activation position
      */
@@ -319,7 +320,7 @@ public class StargateShapeLayer {
 
     /**
      * Sets the layer block positions.
-     * 
+     *
      * @param layerBlockPositions
      *            the new layer block positions
      */
@@ -329,7 +330,7 @@ public class StargateShapeLayer {
 
     /**
      * Sets the layer dialer position.
-     * 
+     *
      * @param layerDialerPosition
      *            the new layer dialer position
      */
@@ -339,7 +340,7 @@ public class StargateShapeLayer {
 
     /**
      * Sets the layer iris activation position.
-     * 
+     *
      * @param layerIrisActivationPosition
      *            the new layer iris activation position
      */
@@ -349,7 +350,7 @@ public class StargateShapeLayer {
 
     /**
      * Sets the layer light positions.
-     * 
+     *
      * @param layerLightPositions
      *            the new layer light positions
      */
@@ -359,7 +360,7 @@ public class StargateShapeLayer {
 
     /**
      * Sets the layer minecart exit position.
-     * 
+     *
      * @param layerMinecartExitPosition
      *            the new layer minecart exit position
      */
@@ -369,7 +370,7 @@ public class StargateShapeLayer {
 
     /**
      * Sets the layer sign position.
-     * 
+     *
      * @param layerSignPosition
      *            the new layer sign position
      */
@@ -379,7 +380,7 @@ public class StargateShapeLayer {
 
     /**
      * Sets the layer exit position.
-     * 
+     *
      * @param layerPlayerExitPosition
      *            the new layer player exit position
      */
@@ -389,7 +390,7 @@ public class StargateShapeLayer {
 
     /**
      * Sets the layer portal positions.
-     * 
+     *
      * @param layerPortalPositions
      *            the new layer portal positions
      */
@@ -399,7 +400,7 @@ public class StargateShapeLayer {
 
     /**
      * Sets the layer redstone activation position.
-     * 
+     *
      * @param layerRedstoneDialActivationPosition
      *            the new layer redstone dial activation position
      */
@@ -409,7 +410,7 @@ public class StargateShapeLayer {
 
     /**
      * Sets the layer redstone activation position.
-     * 
+     *
      * @param layerRedstoneActivationPosition
      *            the new layer redstone activation position
      */
@@ -419,7 +420,7 @@ public class StargateShapeLayer {
 
     /**
      * Sets the layer redstone dialer activation position.
-     * 
+     *
      * @param layerRedstoneSignActivationPosition
      *            the new layer redstone sign activation position
      */
@@ -429,7 +430,7 @@ public class StargateShapeLayer {
 
     /**
      * Sets the layer woosh positions.
-     * 
+     *
      * @param layerWooshPositions
      *            the new layer woosh positions
      */

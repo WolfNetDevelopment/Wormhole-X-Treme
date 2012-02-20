@@ -33,7 +33,7 @@ import java.util.logging.Level;
 
 /**
  * The Enum SimplePermission.
- * 
+ *
  * @author alron
  */
 enum SimplePermission {
@@ -59,7 +59,7 @@ enum SimplePermission {
 
     /**
      * From simple permission node.
-     * 
+     *
      * @param simplePermissionNode
      *            the simple permission node
      * @return the simple permission
@@ -71,7 +71,7 @@ enum SimplePermission {
 
     /**
      * Instantiates a new simple permission.
-     * 
+     *
      * @param simplePermissionNode
      *            the simple permission node
      */
@@ -81,16 +81,26 @@ enum SimplePermission {
 
     /**
      * Check permission.
-     * 
+     *
      * @param player
      *            the player
      * @return true, if successful
      */
     protected boolean checkPermission(Player player) {
-        if ((player != null) && !ConfigManager.getPermissionsSupportDisable() && (WormholeXTreme.getPermissions() != null) && ConfigManager.getSimplePermissions()) {
-            if (WormholeXTreme.getPermissions().has(player, simplePermissionNode)) {
+    	boolean permEx = false;
+    	boolean permBuk = false;
+    	if (WormholeXTreme.getPermissionsEx() != null)
+    		permEx = true;
+    	if (WormholeXTreme.getPermBukkit())
+    		permBuk = true;
+
+        if ((player != null) && !ConfigManager.getPermissionsSupportDisable() && (permEx || permBuk) && ConfigManager.getSimplePermissions()) {
+            if (permEx && WormholeXTreme.getPermissionsEx().has(player, simplePermissionNode)) {
                 WXTLogger.prettyLog(Level.FINE, false, "Player: " + player.getName() + "\" granted simple \"" + toString() + "\" permissions.");
                 return true;
+            } else if (permBuk && player.hasPermission(simplePermissionNode)) {
+            	WXTLogger.prettyLog(Level.FINE, false, "Player: " + player.getName() + "\" granted simple \"" + toString() + "\" permissions.");
+            	return true;
             }
             WXTLogger.prettyLog(Level.FINE, false, "Player: " + player.getName() + "\" denied simple \"" + toString() + "\" permissions.");
 
@@ -100,7 +110,7 @@ enum SimplePermission {
 
     /**
      * Gets the simple permission.
-     * 
+     *
      * @return the simple permission
      */
     public String getSimplePermission() {

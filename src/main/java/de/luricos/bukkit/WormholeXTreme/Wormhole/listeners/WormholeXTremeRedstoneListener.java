@@ -23,10 +23,8 @@ package de.luricos.bukkit.WormholeXTreme.Wormhole.listeners;
 import de.luricos.bukkit.WormholeXTreme.Wormhole.model.Stargate;
 import de.luricos.bukkit.WormholeXTreme.Wormhole.model.StargateManager;
 import de.luricos.bukkit.WormholeXTreme.Wormhole.utils.WXTLogger;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -44,14 +42,14 @@ import java.util.logging.Level;
  * component's <code>addWormholeXTremeRedstoneListener<code> method. When
  * the wormholeXTremeRedstone event occurs, that object's appropriate
  * method is invoked.
- * 
+ *
  * @see WormholeXTremeRedstoneEvent
  */
 public class WormholeXTremeRedstoneListener implements Listener {
 
     /**
      * Checks if current is new.
-     * 
+     *
      * @param oldCurrent
      *            the old current
      * @param newCurrent
@@ -64,7 +62,7 @@ public class WormholeXTremeRedstoneListener implements Listener {
 
     /**
      * Checks if current is on.
-     * 
+     *
      * @param oldCurrent
      *            the old current
      * @param newCurrent
@@ -81,17 +79,17 @@ public class WormholeXTremeRedstoneListener implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onBlockRedstoneChange(final BlockRedstoneEvent event) {
         final Block block = event.getBlock();
-        
+
         if (StargateManager.isBlockInGate(block)) {
             WXTLogger.prettyLog(Level.FINEST, false, "Caught redstone event on block: " + block.toString() + " oldCurrent: " + event.getOldCurrent() + " newCurrent: " + event.getNewCurrent());
-            
+
             final Stargate stargate = StargateManager.getGateFromBlock(event.getBlock());
             if (
-                    (stargate.isGateSignPowered()) && (stargate.isGateRedstonePowered()) && 
-                    (block.getType().equals(Material.REDSTONE_WIRE)) && (isCurrentNew(event.getOldCurrent(), event.getNewCurrent())) && 
+                    (stargate.isGateSignPowered()) && (stargate.isGateRedstonePowered()) &&
+                    (block.getType().equals(Material.REDSTONE_WIRE)) && (isCurrentNew(event.getOldCurrent(), event.getNewCurrent())) &&
                     (!stargate.isGateActive())
                 ) {
-                
+
                 if ((stargate.getGateRedstoneSignActivationBlock() != null) && block.equals(stargate.getGateRedstoneSignActivationBlock()) && isCurrentOn(event.getOldCurrent(), event.getNewCurrent())) {
                     stargate.tryClickTeleportSign(stargate.getGateDialSignBlock(), Action.PHYSICAL);
                     WXTLogger.prettyLog(Level.FINE, false, "Caught redstone sign event on gate: " + stargate.getGateName() + " block: " + block.toString());
@@ -100,7 +98,7 @@ public class WormholeXTremeRedstoneListener implements Listener {
                         stargate.shutdownStargate(true);
                         WXTLogger.prettyLog(Level.FINE, false, "Caught redstone shutdown event on gate: " + stargate.getGateName() + " block: " + block.toString());
                     }
-                    
+
                     if (!stargate.isGateActive() && (stargate.getGateDialSignTarget() != null) && !stargate.isGateRecentlyActive()) {
                         stargate.dialStargate(stargate.getGateDialSignTarget(), false);
                         WXTLogger.prettyLog(Level.FINE, false, "Caught redstone dial event on gate: " + stargate.getGateName() + " block: " + block.toString());

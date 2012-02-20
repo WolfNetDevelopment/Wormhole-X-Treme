@@ -128,7 +128,7 @@ public class WXPermissions {
                 default:
                     return false;
             }
-        } else if (!ConfigManager.getPermissionsSupportDisable() && (WormholeXTreme.getPermissions() != null)) {
+        } else if (!ConfigManager.getPermissionsSupportDisable() && (WormholeXTreme.getPermissionsEx() != null)) {
 
             if (ConfigManager.getSimplePermissions()) {
                 switch (permissiontype) {

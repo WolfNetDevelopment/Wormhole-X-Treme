@@ -612,13 +612,13 @@ public class Wormhole implements CommandExecutor {
                 sender.sendMessage(ConfigManager.MessageStrings.errorHeader.toString() + "Valid options: true/yes, false/no");
                 return false;
             }
-            if ((WormholeXTreme.getPermissions() != null) && CommandUtilities.playerCheck(sender)) {
+            if ((WormholeXTreme.getPermissionsEx() != null) && CommandUtilities.playerCheck(sender)) {
                 player = (Player) sender;
-                if (simple && !WormholeXTreme.getPermissions().has(player, "wormhole.simple.config")) {
+                if (simple && !WormholeXTreme.getPermissionsEx().has(player, "wormhole.simple.config")) {
                     sender.sendMessage(ConfigManager.MessageStrings.errorHeader.toString() + "You currently do not have the 'wormhole.simple.config' permission.");
                     sender.sendMessage(ConfigManager.MessageStrings.errorHeader.toString() + "Please make sure you have this permission before running this command again.");
                     return true;
-                } else if (!simple && !WormholeXTreme.getPermissions().has(player, "wormhole.config")) {
+                } else if (!simple && !WormholeXTreme.getPermissionsEx().has(player, "wormhole.config")) {
                     sender.sendMessage(ConfigManager.MessageStrings.errorHeader.toString() + "You currently do not have the 'wormhole.config' permission.");
                     sender.sendMessage(ConfigManager.MessageStrings.errorHeader.toString() + "Please make sure you have this permission before running this command again.");
                     return true;

@@ -31,14 +31,14 @@ import java.util.logging.Level;
 
 /**
  * The Class PermissionsSupport.
- * 
+ *
  * @author alron
  */
 public class PermissionsSupport {
 
     /**
      * Check permissions version.
-     * 
+     *
      * @param version
      *            the version
      */
@@ -53,9 +53,12 @@ public class PermissionsSupport {
      * Disable permissions.
      */
     public static void disablePermissions() {
-        if (WormholeXTreme.getPermissions() != null) {
-            WormholeXTreme.setPermissions(null);
+        if (WormholeXTreme.getPermissionsEx() != null) {
+            WormholeXTreme.setPermissionsEx(null);
             WXTLogger.prettyLog(Level.INFO, false, "Detached from Permissions plugin.");
+        } else if (WormholeXTreme.getPermBukkit()) {
+        	WormholeXTreme.setPermBukkit(false);
+        	WXTLogger.prettyLog(Level.INFO, false, "Detached from Permissions plugin.");
         }
     }
 
@@ -64,13 +67,14 @@ public class PermissionsSupport {
      */
     public static void enablePermissions() {
         if (!ConfigManager.getPermissionsSupportDisable()) {
-            if (WormholeXTreme.getPermissions() == null) {
+            if (WormholeXTreme.getPermissionsEx() == null) {
                 final Plugin test = WormholeXTreme.getThisPlugin().getServer().getPluginManager().getPlugin("PermissionsEx");
+                final Plugin test2 = WormholeXTreme.getThisPlugin().getServer().getPluginManager().getPlugin("PermissionsBukkit");
                 if ((test != null) && (Bukkit.getServer().getPluginManager().isPluginEnabled("PermissionsEx"))) {
                     final String v = test.getDescription().getVersion();
                     checkPermissionsVersion(v);
                     try {
-                        WormholeXTreme.setPermissions(PermissionsEx.getPermissionManager());
+                        WormholeXTreme.setPermissionsEx(PermissionsEx.getPermissionManager());
                         WXTLogger.prettyLog(Level.INFO, false, "Attached to PermissionsEx version " + v);
                         if (ConfigManager.getSimplePermissions()) {
                             WXTLogger.prettyLog(Level.INFO, false, "Simple Permissions Enabled");
@@ -79,6 +83,14 @@ public class PermissionsSupport {
                         }
                     } catch (final ClassCastException e) {
                         WXTLogger.prettyLog(Level.WARNING, false, "Failed to get Permissions Handler. Defaulting to built-in permissions.");
+                    }
+                } else if ((test2 != null) && (Bukkit.getServer().getPluginManager().isPluginEnabled("PermissionsBukkit"))) {
+                	WormholeXTreme.setPermBukkit(true);
+                	WXTLogger.prettyLog(Level.INFO, false, "Attached to PermissionsBukkit");
+                	if (ConfigManager.getSimplePermissions()) {
+                        WXTLogger.prettyLog(Level.INFO, false, "Simple Permissions Enabled");
+                    } else {
+                        WXTLogger.prettyLog(Level.INFO, false, "Complex Permissions Enabled");
                     }
                 } else {
                     WXTLogger.prettyLog(Level.INFO, false, "Permission Plugin not yet available. Defaulting to built-in permissions until Permissions is loaded.");

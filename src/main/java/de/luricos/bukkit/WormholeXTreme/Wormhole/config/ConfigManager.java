@@ -44,6 +44,8 @@ public class ConfigManager {
         PERMISSIONS_SUPPORT_DISABLE,
         /** The SIMPLE PERMISSIONS. */
         SIMPLE_PERMISSIONS,
+        /** Enable Support for Bukkits builtin SuperPermAPI */
+        SUPER_PERM_ENABLE,
         /** The WORMHOL e_ us e_ i s_ teleport. */
         WORMHOLE_USE_IS_TELEPORT,
         /** The TIMEOU t_ activate. */
@@ -140,7 +142,7 @@ public class ConfigManager {
 
         /**
          * Instantiates a new string types.
-         * 
+         *
          * @param message
          *            the message
          */
@@ -161,7 +163,7 @@ public class ConfigManager {
 
     /**
      * Gets the builds the restriction group one.
-     * 
+     *
      * @return the builds the restriction group one
      */
     public static int getBuildRestrictionGroupOne() {
@@ -172,7 +174,7 @@ public class ConfigManager {
 
     /**
      * Gets the builds the restriction group three.
-     * 
+     *
      * @return the builds the restriction group three
      */
     public static int getBuildRestrictionGroupThree() {
@@ -183,7 +185,7 @@ public class ConfigManager {
 
     /**
      * Gets the builds the restriction group two.
-     * 
+     *
      * @return the builds the restriction group two
      */
     public static int getBuildRestrictionGroupTwo() {
@@ -195,7 +197,7 @@ public class ConfigManager {
     /**
      * Get Built in default permission level settings from ConfigKeys. Return sane PermissionLevel.
      * Return default value if key is missing or broken.
-     * 
+     *
      * @return the built in default permission level
      */
     public static PermissionLevel getBuiltInDefaultPermissionLevel() {
@@ -210,7 +212,7 @@ public class ConfigManager {
     /**
      * Get Built in permissions enabled settings from ConfigKeys. Return sane boolean value.
      * Return default value if key is missing or broken.
-     * 
+     *
      * @return the built in permissions enabled
      */
     public static boolean getBuiltInPermissionsEnabled() {
@@ -224,7 +226,7 @@ public class ConfigManager {
 
     /**
      * Gets the configurations.
-     * 
+     *
      * @return the configurations
      */
     protected static ConcurrentHashMap<ConfigKeys, Setting> getConfigurations() {
@@ -233,7 +235,7 @@ public class ConfigManager {
 
     /**
      * Gets the Help plugin support status.
-     * 
+     *
      * @return true, if Help plugin support is disabled.
      */
     public static boolean getHelpSupportDisable() {
@@ -244,7 +246,7 @@ public class ConfigManager {
     /**
      * Get Log Level setting from ConfigKeys. Return sane Level value.
      * Return default value if key is missing or broken.
-     * 
+     *
      * @return the log level
      */
     public static Level getLogLevel() {
@@ -258,7 +260,7 @@ public class ConfigManager {
 
     /**
      * get WelcomeMessageEnabled boolean value
-     * 
+     *
      * @return true if enabled (default) or false if disabled
      */
     public static boolean isGateArrivalWelcomeMessageEnabled() {
@@ -266,21 +268,21 @@ public class ConfigManager {
         if ((wme = ConfigManager.getConfigurations().get(ConfigKeys.SHOW_GATE_WELCOME_MESSAGE)) != null) {
             return wme.getBooleanValue();
         }
-        
+
         return true;
     }
-    
+
     /**
      * Set SHOW_GATE_WELCOME_MESSAGE true or false
-     * @param g 
+     * @param g
      */
     public static void setShowGWM(final boolean g) {
         ConfigManager.setConfigValue(ConfigKeys.SHOW_GATE_WELCOME_MESSAGE, g);
     }
-    
+
     /**
      * Get Transportation Method for onPlayerMove()
-     * 
+     *
      * @return true EVENT, false TELEPORT
      */
     public static boolean getGateTransportMethod() {
@@ -288,17 +290,17 @@ public class ConfigManager {
         if ((tm = ConfigManager.getConfigurations().get(ConfigKeys.USE_EVENT_OR_TP_TRANSPORT)) != null) {
             return tm.getBooleanValue();
         }
-        
+
         return true;
     }
-    
+
     public static void setGateTransportMethod(boolean tm) {
         ConfigManager.setConfigValue(ConfigKeys.USE_EVENT_OR_TP_TRANSPORT, tm);
     }
-    
+
     /**
      * Get kick back block count
-     * 
+     *
      * @return
      */
     public static int getWormholeKickbackBlockCount() {
@@ -306,10 +308,10 @@ public class ConfigManager {
                 ? getSetting(ConfigKeys.WORMHOLE_KICKBACK_BLOCK_COUNT).getIntValue()
                 : 2;
     }
-    
+
     /**
      * Set kick back block count
-     * 
+     *
      * @param wkbCount amount of blocks to kick back the player; relative to gate
      */
     public static void setWormholeKickbackBlockCount(int wkbCount) {
@@ -318,7 +320,7 @@ public class ConfigManager {
 
     /**
      * Gets the Permissions plugin support status.
-     * 
+     *
      * @return true, if Permissions plugin support is disabled.
      */
     public static boolean getPermissionsSupportDisable() {
@@ -328,7 +330,7 @@ public class ConfigManager {
 
     /**
      * Gets the setting.
-     * 
+     *
      * @param configKey
      *            the config key
      * @return the setting
@@ -339,7 +341,7 @@ public class ConfigManager {
 
     /**
      * Gets the simple permissions.
-     * 
+     *
      * @return the simple permissions
      */
     public static boolean getSimplePermissions() {
@@ -354,7 +356,7 @@ public class ConfigManager {
     /**
      * Get Timeout Activate setting from ConfigKeys.
      * Return default value if key is missing or broken.
-     * 
+     *
      * @return Timeout in seconds.
      */
     public static int getTimeoutActivate() {
@@ -369,7 +371,7 @@ public class ConfigManager {
     /**
      * Get Timeout Shutdown setting from ConfigKeys.
      * Return default value if key is missing or broken.
-     * 
+     *
      * @return Timeout in seconds.
      */
     public static int getTimeoutShutdown() {
@@ -383,7 +385,7 @@ public class ConfigManager {
 
     /**
      * Gets the use cooldown group one.
-     * 
+     *
      * @return the use cooldown group one
      */
     public static int getUseCooldownGroupOne() {
@@ -394,7 +396,7 @@ public class ConfigManager {
 
     /**
      * Gets the use cooldown group three.
-     * 
+     *
      * @return the use cooldown group three
      */
     public static int getUseCooldownGroupThree() {
@@ -405,7 +407,7 @@ public class ConfigManager {
 
     /**
      * Gets the use cooldown group two.
-     * 
+     *
      * @return the use cooldown group two
      */
     public static int getUseCooldownGroupTwo() {
@@ -416,7 +418,7 @@ public class ConfigManager {
 
     /**
      * Gets the wormhole use is teleport.
-     * 
+     *
      * @return the wormhole use is teleport
      */
     public static boolean getWormholeUseIsTeleport() {
@@ -430,7 +432,7 @@ public class ConfigManager {
 
     /**
      * Checks if is builds the restriction enabled.
-     * 
+     *
      * @return true, if is builds the restriction enabled
      */
     public static boolean isBuildRestrictionEnabled() {
@@ -438,8 +440,17 @@ public class ConfigManager {
     }
 
     /**
+     * Checks if SuperPermAPI is enabled.
+     *
+     * @return true, if it is enabled
+     */
+    public static boolean isSuperPermEnabled() {
+        return ConfigManager.getConfigurations().get(ConfigKeys.SUPER_PERM_ENABLE) != null && ConfigManager.getConfigurations().get(ConfigKeys.SUPER_PERM_ENABLE).getBooleanValue();
+    }
+
+    /**
      * Checks if is configuration key.
-     * 
+     *
      * @param configKey
      *            the config key
      * @return true, if is configuration key
@@ -450,7 +461,7 @@ public class ConfigManager {
 
     /**
      * Checks if is use cooldown enabled.
-     * 
+     *
      * @return true, if is use cooldown enabled
      */
     public static boolean isUseCooldownEnabled() {
@@ -459,7 +470,7 @@ public class ConfigManager {
 
     /**
      * Checks if is wormhole worlds support enabled.
-     * 
+     *
      * @return true, if is wormhole worlds support enabled
      */
     public static boolean isWormholeWorldsSupportEnabled() {
@@ -473,7 +484,7 @@ public class ConfigManager {
 
     /**
      * Sets the builds the restriction enabled.
-     * 
+     *
      * @param b
      *            the new builds the restriction enabled
      */
@@ -483,7 +494,7 @@ public class ConfigManager {
 
     /**
      * Sets the builds the restriction group one.
-     * 
+     *
      * @param count
      *            the new builds the restriction group one
      */
@@ -493,7 +504,7 @@ public class ConfigManager {
 
     /**
      * Sets the builds the restriction group three.
-     * 
+     *
      * @param count
      *            the new builds the restriction group three
      */
@@ -503,7 +514,7 @@ public class ConfigManager {
 
     /**
      * Sets the builds the restriction group two.
-     * 
+     *
      * @param count
      *            the new builds the restriction group two
      */
@@ -513,7 +524,7 @@ public class ConfigManager {
 
     /**
      * Sets the config value.
-     * 
+     *
      * @param key
      *            the key
      * @param value
@@ -527,7 +538,7 @@ public class ConfigManager {
 
     /**
      * Sets the simple permissions.
-     * 
+     *
      * @param b
      *            the new simple permissions
      */
@@ -537,7 +548,7 @@ public class ConfigManager {
 
     /**
      * Set timeout activate setting in ConfigKeys.
-     * 
+     *
      * @param i
      *            Timeout in seconds.
      */
@@ -547,7 +558,7 @@ public class ConfigManager {
 
     /**
      * Set timeout shutdown setting in ConfigKeys.
-     * 
+     *
      * @param i
      *            the new timeout shutdown
      */
@@ -557,7 +568,7 @@ public class ConfigManager {
 
     /**
      * Sets the up configs.
-     * 
+     *
      * @param pdf
      *            the new up configs
      */
@@ -567,7 +578,7 @@ public class ConfigManager {
 
     /**
      * Sets the use cooldown enabled.
-     * 
+     *
      * @param b
      *            the new use cooldown enabled
      */
@@ -577,7 +588,7 @@ public class ConfigManager {
 
     /**
      * Sets the use cooldown group one.
-     * 
+     *
      * @param time
      *            the new use cooldown group one
      */
@@ -587,7 +598,7 @@ public class ConfigManager {
 
     /**
      * Sets the use cooldown group three.
-     * 
+     *
      * @param time
      *            the new use cooldown group three
      */
@@ -597,17 +608,17 @@ public class ConfigManager {
 
     /**
      * Sets the use cooldown group two.
-     * 
+     *
      * @param time
      *            the new use cooldown group two
      */
     public static void setUseCooldownGroupTwo(final int time) {
         setConfigValue(ConfigKeys.USE_COOLDOWN_GROUP_TWO, time);
     }
-    
+
     /**
      * Set the debug level
-     * 
+     *
      * @param level - SEVERE, WARNING, INFO, CONFIG, FINE, FINER, FINEST
      */
     public static void setDebugLevel(final String level) {

@@ -34,7 +34,7 @@ import java.util.logging.Level;
 
 /**
  * The Enum ComplexPermission.
- * 
+ *
  * @author alron
  */
 enum ComplexPermission {
@@ -86,7 +86,7 @@ enum ComplexPermission {
 
     /**
      * From complex permission node.
-     * 
+     *
      * @param complexPermissionNode
      *            the complex permission node
      * @return the complex permission
@@ -98,7 +98,7 @@ enum ComplexPermission {
 
     /**
      * Instantiates a new complex permission.
-     * 
+     *
      * @param complexPermissionNode
      *            the complex permission node
      */
@@ -108,7 +108,7 @@ enum ComplexPermission {
 
     /**
      * Check permission.
-     * 
+     *
      * @param player
      *            the player
      * @return true, if successful
@@ -119,7 +119,7 @@ enum ComplexPermission {
 
     /**
      * Check permission.
-     * 
+     *
      * @param player
      *            the player
      * @param stargate
@@ -132,36 +132,58 @@ enum ComplexPermission {
 
     /**
      * Check permission.
-     * 
+     *
      * @param player the player
      * @param stargate the gate
      * @param networkName the network name
      * @return true, if successful
      */
     public boolean checkPermission(final Player player, final Stargate stargate, final String networkName) {
-        if ((player != null) && (WormholeXTreme.getPermissions() != null) && !ConfigManager.getSimplePermissions()) {
+    	boolean permEx = false;
+    	boolean permBuk = false;
+    	if (WormholeXTreme.getPermissionsEx() != null)
+    		permEx = true;
+    	if (WormholeXTreme.getPermBukkit())
+    		permBuk = true;
+
+        if ((player != null) && (permEx || permBuk) && !ConfigManager.getSimplePermissions()) {
             boolean allowed = false;
 
-            switch (this) {
+            if (permEx) {
+	            switch (this) {
+	                case NETWORK_USE:
+	                case NETWORK_BUILD:
+	                    allowed = networkName != null && WormholeXTreme.getPermissionsEx().has(player, complexPermissionNode + networkName);
+	                    break;
+	                case REMOVE_OWN:
+	                    allowed = ((stargate != null) && (stargate.getGateOwner() != null) && stargate.getGateOwner().equals(player.getName()) && WormholeXTreme.getPermissionsEx().has(player, complexPermissionNode));
+	                    break;
+	                default:
+	                    allowed = WormholeXTreme.getPermissionsEx().has(player, complexPermissionNode);
+	                    break;
+	            }
+            } else if (permBuk) {
+            	switch (this) {
                 case NETWORK_USE:
                 case NETWORK_BUILD:
-                    allowed = networkName != null && WormholeXTreme.getPermissions().has(player, complexPermissionNode + networkName);
+                    allowed = networkName != null && player.hasPermission(complexPermissionNode + networkName);
                     break;
                 case REMOVE_OWN:
-                    allowed = ((stargate != null) && (stargate.getGateOwner() != null) && stargate.getGateOwner().equals(player.getName()) && WormholeXTreme.getPermissions().has(player, complexPermissionNode));
+                    allowed = ((stargate != null) && (stargate.getGateOwner() != null) && stargate.getGateOwner().equals(player.getName()) && player.hasPermission(complexPermissionNode));
                     break;
                 default:
-                    allowed = WormholeXTreme.getPermissions().has(player, complexPermissionNode);
+                    allowed = player.hasPermission(complexPermissionNode);
                     break;
             }
-            
+            }
+
             if (allowed) {
                 WXTLogger.prettyLog(Level.FINE, false, "Player: '" + player.getName() + "' granted complex \"" + toString() + "\" permission" + (networkName != null
                         ? " on network \"" + networkName + "\""
                         : "") + ".");
                 return true;
             }
-            
+
             WXTLogger.prettyLog(Level.FINE, false, "Player: '" + player.getName() + "' denied complex \"" + toString() + "\" permission" + (networkName != null
                     ? " on network \"" + networkName + "\""
                     : "") + ".");
@@ -171,7 +193,7 @@ enum ComplexPermission {
 
     /**
      * Check permission.
-     * 
+     *
      * @param player
      *            the player
      * @param networkName
@@ -184,7 +206,7 @@ enum ComplexPermission {
 
     /**
      * Gets the complex permission.
-     * 
+     *
      * @return the complex permission
      */
     public String getComplexPermission() {

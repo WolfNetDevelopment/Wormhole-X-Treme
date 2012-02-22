@@ -109,7 +109,7 @@ public class HelpSupport {
             String wxreload;
             String wxstatus;
             String wormhole;
-            if (WormholeXTreme.getPermissions() != null) {
+            if (WormholeXTreme.getPermissionsEx() != null) {
                 if (ConfigManager.getSimplePermissions()) {
                     dial = sp[0];
                     wxidc = sp[2];

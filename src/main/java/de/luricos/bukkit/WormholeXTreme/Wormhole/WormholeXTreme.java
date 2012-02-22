@@ -102,8 +102,6 @@ public class WormholeXTreme extends JavaPlugin {
             return;
         }
 
-        permBukkit = ConfigManager.isSuperPermEnabled();
-
         // Load our shapes, stargates, and internal permissions.
         StargateHelper.loadShapes();
 

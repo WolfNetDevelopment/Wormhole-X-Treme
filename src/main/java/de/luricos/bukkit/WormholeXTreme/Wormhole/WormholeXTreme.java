@@ -187,6 +187,8 @@ public class WormholeXTreme extends JavaPlugin {
 
         PermissionsManager.loadPermissions();
 
+        // Set SuperPerm support
+        permBukkit = ConfigManager.isSuperPermEnabled();
         // Is support for bukkits SuperPerms en-/disabled?
         WXTLogger.prettyLog(Level.INFO, false, "SuperPerms enabled: " + ConfigManager.isSuperPermEnabled());
 

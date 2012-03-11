@@ -1,6 +1,6 @@
 name: WormholeXTreme
 main: de.luricos.bukkit.WormholeXTreme.Wormhole.WormholeXTreme
-version: 1.016
+version: 1.017
 authors: [Lologarithm, alron, lycano]
 softdepend: [PermissionsEx, WormholeXTremeWorlds, Help]
 description: >
@@ -9,7 +9,7 @@ description: >
              
 commands:
    dial:
-     description: Dial a remote Stargate, unlock IDC with optional password 
+     description: Dial a remote Stargate, unlock IDC with optional password
      usage: |
             /<command> <StarGate> [IDC]
             <stargate> The StarGate to dial.
@@ -65,12 +65,20 @@ commands:
             /<command> <GateName> <optional_set_idc>
             Requires being either owner or have wormhole.config
             set -clear to remove the IDC
-
+   wxmessage:
+     description: Gets or sets the gates welcome message
+     usage: |
+            /<command> <GateName> <optional_set_message>
+            Requires being either owner or have wormhole.config
+            set -clear to set message back to default
+            placeholder in message:
+            %name% - name of teleported person
+            %gate% - name of the gate
+            %owner% - name of the gateowner
    wxforce:
      description: Forcefully shut down, darken, and open the iris of either a single or all gates.
      usage: |
             /<command> <gateName|-all>
-
    wxgo:
      description: Teleport to specified wormhole.
      usage: |

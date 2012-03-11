@@ -556,7 +556,7 @@ public class WormholeXTremePlayerListener implements Listener {
                 WXTLogger.prettyLog(Level.FINE, false, "Cancelled Player: \"" + event.getPlayer().getName() + "\" Event Name: \"" + event.getEventName() + "\" Action Type: \"" + event.getAction().toString() + "\" Event Block Type: \"" + event.getClickedBlock().getType().toString() + "\" Event World: \"" + event.getClickedBlock().getWorld().toString() + "\" Event Block: " + event.getClickedBlock().toString() + "\"");
             }
         } else {
-            WXTLogger.prettyLog(Level.FINE, false, "Caught and ignored Player: \"" + event.getPlayer().getName() + "\" Event type: \"" + event.getType().toString() + "\"");
+            WXTLogger.prettyLog(Level.FINE, false, "Caught and ignored Player: \"" + event.getPlayer().getName() + "\" Event type: \"" + event.getEventName() + "\"");
         }
     }
 
@@ -573,10 +573,14 @@ public class WormholeXTremePlayerListener implements Listener {
 
         if ((wormholePlayer != null) && (wormholePlayer.getProperties() != null) && (wormholePlayer.getProperties().hasUsedStargate())) {
             if (ConfigManager.isGateArrivalWelcomeMessageEnabled()) {
-                player.sendMessage(
+            	String message = (!wormholePlayer.getStargate().getGateTarget().getGateMessage().equals("")) ? ConfigManager.MessageStrings.normalHeader + wormholePlayer.getStargate().getGateTarget().getGateMessage() : ConfigManager.MessageStrings.playerUsedStargate.toString();
+            	player.sendMessage(message.replace("%name%", player.getDisplayName())
+            			           .replace("%gate%", wormholePlayer.getStargate().getGateTarget().getGateName())
+            			           .replace("%owner%", wormholePlayer.getStargate().getGateTarget().getGateOwner()));
+                /*player.sendMessage(
                         String.format(ConfigManager.MessageStrings.playerUsedStargate.toString(),
                         "Gate " + wormholePlayer.getStargate().getGateTarget().getGateName(),
-                        " - created by " + wormholePlayer.getStargate().getGateTarget().getGateOwner()));
+                        " - created by " + wormholePlayer.getStargate().getGateTarget().getGateOwner()));*/
                 WXTLogger.prettyLog(Level.FINE, false, "has received SHOW_GATE_WELCOME_MESSAGE");
             } else{
                 WXTLogger.prettyLog(Level.FINE, false, "has disabled SHOW_GATE_WELCOME_MESSAGE");

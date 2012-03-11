@@ -299,6 +299,7 @@ public class WormholeXTreme extends JavaPlugin {
         final WormholeXTreme tp = getThisPlugin();
         tp.getCommand("wxforce").setExecutor(new Force());
         tp.getCommand("wxidc").setExecutor(new WXIDC());
+        tp.getCommand("wxmessage").setExecutor(new WXMessage());
         tp.getCommand("wxcompass").setExecutor(new Compass());
         tp.getCommand("wxcomplete").setExecutor(new Complete());
         tp.getCommand("wxremove").setExecutor(new WXRemove());

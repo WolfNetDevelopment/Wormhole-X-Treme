@@ -42,8 +42,11 @@ public class PermissionsSupport {
      * @param version
      *            the version
      */
-    private static void checkPermissionsVersion(final String version) {
-        Double ver = Double.parseDouble(version);
+    private static void checkPermissionsVersion(String version) {
+    	while(version.length() - version.replaceAll("[^.]", "").length() >= 2) {
+    		version = version.substring(0, version.lastIndexOf("."));
+    	}
+    	Double ver = Double.parseDouble(version);
         if (ver < 1.8) {
             WXTLogger.prettyLog(Level.WARNING, false, "Not supported version of PermissionsEx. Recommended is at least 1.8");
         }

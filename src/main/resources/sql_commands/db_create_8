@@ -1,0 +1,3 @@
+ALTER TABLE Stargates MODIFY World TEXT DEFAULT '';
+
+INSERT INTO VersionInfo VALUES (8);

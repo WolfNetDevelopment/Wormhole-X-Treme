@@ -134,7 +134,7 @@ public class ConfigManager {
         /** The player use cooldown wait time. */
         playerUseCooldownWaitTime(errorHeader + "Current Wait (in seconds): "),
         /** The player used a stargate and arrived at destination safely */
-        playerUsedStargate(normalHeader + "Welcome at %s%s");
+        playerUsedStargate(normalHeader + "Welcome at Gate %gate% - created by %owner%");
         /** The m. */
         private final String m;
 

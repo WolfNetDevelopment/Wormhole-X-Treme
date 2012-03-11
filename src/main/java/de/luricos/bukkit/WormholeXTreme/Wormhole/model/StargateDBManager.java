@@ -200,6 +200,7 @@ public class StargateDBManager {
                 if (s != null) {
                     s.setGateId(gatesData.getInt("Id"));
                     s.setGateOwner(gatesData.getString("Owner"));
+                    s.setGateMessage(gatesData.getString("Message"));
                     String gateShapeName = gatesData.getString("GateShape");
                     if (gateShapeName == null) {
                         gateShapeName = "Standard";
@@ -356,7 +357,7 @@ public class StargateDBManager {
             gatesData = getGateStatement.executeQuery();
             if (gatesData.next()) {
                 if (updateGateStatement == null) {
-                    updateGateStatement = wormholeSQLConnection.prepareStatement("UPDATE Stargates SET GateData = ?, Network = ?, World = ?, WorldName = ?, WorldEnvironment = ?, Owner = ?, GateShape = ? WHERE Id = ?");
+                    updateGateStatement = wormholeSQLConnection.prepareStatement("UPDATE Stargates SET GateData = ?, Network = ?, World = ?, WorldName = ?, WorldEnvironment = ?, Owner = ?, GateShape = ?, Message = ? WHERE Id = ?");
                 }
 
                 updateGateStatement.setBytes(1, StargateHelper.stargatetoBinary(s));
@@ -365,7 +366,7 @@ public class StargateDBManager {
                 } else {
                     updateGateStatement.setString(2, "");
                 }
-                updateGateStatement.setLong(3, s.getGateWorld().getId());
+                updateGateStatement.setString(3, s.getGateWorld().getUID().toString());
                 updateGateStatement.setString(4, s.getGateWorld().getName());
                 updateGateStatement.setString(5, s.getGateWorld().getEnvironment().toString());
                 updateGateStatement.setString(6, s.getGateOwner());
@@ -374,14 +375,14 @@ public class StargateDBManager {
                 } else {
                     updateGateStatement.setString(7, s.getGateShape().getShapeName());
                 }
-
-                updateGateStatement.setLong(8, s.getGateId());
+                updateGateStatement.setString(8, s.getGateMessage());
+                updateGateStatement.setLong(9, s.getGateId());
                 updateGateStatement.executeUpdate();
             } else {
                 gatesData.close();
 
                 if (storeStatement == null) {
-                    storeStatement = wormholeSQLConnection.prepareStatement("INSERT INTO Stargates(Name, GateData, Network, World, WorldName, WorldEnvironment, Owner, GateShape) VALUES ( ? , ? , ? , ? , ? , ?, ?, ? );");
+                    storeStatement = wormholeSQLConnection.prepareStatement("INSERT INTO Stargates(Name, GateData, Network, World, WorldName, WorldEnvironment, Owner, GateShape, Message) VALUES ( ? , ? , ? , ? , ? , ?, ?, ?, ? );");
                 }
 
                 storeStatement.setString(1, s.getGateName());
@@ -393,12 +394,12 @@ public class StargateDBManager {
                     storeStatement.setString(3, "");
                 }
 
-                storeStatement.setLong(4, s.getGateWorld().getId());
+                storeStatement.setString(4, s.getGateWorld().getUID().toString());
                 storeStatement.setString(5, s.getGateWorld().getName());
                 storeStatement.setString(6, s.getGateWorld().getEnvironment().toString());
                 storeStatement.setString(7, s.getGateOwner());
                 storeStatement.setString(8, s.getGateShape().getShapeName());
-
+                storeStatement.setString(9, s.getGateMessage());
                 storeStatement.executeUpdate();
 
                 getGateStatement.setString(1, s.getGateName());

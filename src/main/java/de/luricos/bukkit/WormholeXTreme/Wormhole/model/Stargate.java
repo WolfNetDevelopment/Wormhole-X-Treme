@@ -57,6 +57,8 @@ public class Stargate {
     private long gateId = -1;
     /** Name of this gate, used to index and target. */
     private String gateName = "";
+    /** Message dispalyed to teleported users */
+    private String gateMessage = "";
     /** GateName that dialed in */
     private String gateSourceName = null;
     /** Name of person who made the gate. */
@@ -740,6 +742,15 @@ public class Stargate {
     public String getGateName() {
         return gateName;
     }
+    
+    /**
+     * Gets the welcome message
+     * 
+     * @return the welcome message
+     */
+    public String getGateMessage() {
+    	return this.gateMessage;
+    }
 
     /**
      * Gets the gate name block holder.
@@ -1349,6 +1360,19 @@ public class Stargate {
      */
     public void setGateIrisDeactivationCode(final String gateIrisDeactivationCode) {
         this.gateIrisDeactivationCode = gateIrisDeactivationCode;
+    }
+    
+    /**
+     * Sets the gate welcome message<br/>
+     * Placeholder:<br/>
+     * <ul>
+     *   <li>%name% - Name of the teleported</li>
+     *   <li>%gate% - Name of the gate</li>
+     *   <li>%owner% - Name of the owner</li>
+     * </ul>
+     */
+    public void setGateMessage(final String gateMessage) {
+    	this.gateMessage = gateMessage;
     }
 
     /**

@@ -359,6 +359,16 @@ public class WormholeXTremePlayerListener implements Listener {
 
         return false;
     }
+    
+    private boolean hasChangedBlockCoordinates(final Location fromLoc, final Location toLoc) {
+        if (fromLoc.getWorld().equals(toLoc.getWorld())
+                && fromLoc.getBlockX() == toLoc.getBlockX()
+                && fromLoc.getBlockY() == toLoc.getBlockY()
+                && fromLoc.getBlockZ() == toLoc.getBlockZ()) {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * Handle player move event.
@@ -368,6 +378,9 @@ public class WormholeXTremePlayerListener implements Listener {
      * @return true, if successful
      */
     protected WormholePlayer handlePlayerMoveEvent(PlayerMoveEvent event) {
+        if (!this.hasChangedBlockCoordinates(event.getFrom(), event.getTo())) {
+            return;
+        }
         Player player = event.getPlayer();
         Location toLocFinal = event.getTo();
         Block gateBlockFinal = toLocFinal.getWorld().getBlockAt(toLocFinal.getBlockX(), toLocFinal.getBlockY(), toLocFinal.getBlockZ());

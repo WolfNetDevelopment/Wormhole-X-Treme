@@ -16,12 +16,12 @@ public class BukkitPermissionsSupport extends PermissionBackend {
 
     @Override
     public void initialize() {
-        throw new UnsupportedOperationException("Not implemented yet.");
+        return; // not needed
     }
 
     @Override
     public void reload() {
-        throw new UnsupportedOperationException("Not implemented yet.");
+        return; // not needed
     }
 
     public String getName() {
@@ -30,6 +30,6 @@ public class BukkitPermissionsSupport extends PermissionBackend {
 
     @Override
     public boolean hasPermission(Player player, String permissionString) {
-        throw new UnsupportedOperationException("Not implemented yet.");
+        return player.hasPermission(permissionString);
     }
 }
